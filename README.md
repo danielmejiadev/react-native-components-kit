@@ -1,12 +1,12 @@
-# react-native-components
-[NPM Package](https://www.npmjs.com/package/react-native-components)
+# react-native-components-kit
+[NPM Package](https://www.npmjs.com/package/react-native-components-kit)
 
 A set of easy and highly customizable React Native components
 
 ## Getting started
 
-- `yarn add react-native-components`
-- `npm install react-native-components`
+- `yarn add react-native-components-kit`
+- `npm install react-native-components-kit`
 
 ### Usage
 
@@ -20,7 +20,7 @@ It allows you to create a highly customizable and dynamic summary of items.
 
 ### Usage
 
-`import { SummaryItems } from 'react-native-components';`
+`import { SummaryItems } from 'react-native-components-kit';`
 
 ```jsx
 <SummaryItems
