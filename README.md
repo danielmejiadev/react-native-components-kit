@@ -22,7 +22,7 @@ It allows you to create a highly customizable and dynamic summary of items.
 
 `import { SummaryItems } from 'react-native-components-kit';`
 
-```jsx
+```tsx
 <SummaryItems
   containerStyle={{ marginHorizontal: 25 }}
   titleStyle={{ fontSize: 20 }}
@@ -52,6 +52,37 @@ It allows you to create a highly customizable and dynamic summary of items.
     value: '42.00',
   }}
 />
+```
+
+## StepperContainer
+
+It allows you to create a container wrapper for a stepper with the whole logic.
+
+### Usage
+
+`import { StepperContainer } from 'react-native-components-kit';`
+
+```tsx
+const steps = [
+  {
+    key: 'firstStep',
+    component: ({ goToNext, goToPrevious, goTo, ...stepProps }) => MyComponent,
+  },
+  {
+    key: 'secondStep',
+    component: ({ goToNext, goToPrevious, goTo, ...stepProps }) => MyComponent,
+  }
+];
+
+return (
+  <StepperContainer
+    initialStep={1}
+    onCancel={() => console.log('go to back pressed on the first step')}
+    onSubmit={() => console.log('go to next pressed on the last step')}
+    steps={steps}
+    {...stepProps}
+  />
+);
 ```
 
 ### License
