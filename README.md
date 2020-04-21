@@ -8,8 +8,6 @@ A set of easy and highly customizable React Native components
 - `yarn add react-native-components-kit`
 - `npm install react-native-components-kit`
 
-### Usage
-
 # Components
 
 ## SummaryItems
@@ -60,29 +58,36 @@ It allows you to create a container wrapper for a stepper with the whole logic.
 
 ### Usage
 
-`import { StepperContainer } from 'react-native-components-kit';`
+`import { StepperContainer, useStepper } from 'react-native-components-kit';`
 
 ```tsx
-const steps = [
-  {
-    key: 'firstStep',
-    component: ({ goToNext, goToPrevious, goTo, ...stepProps }) => MyComponent,
-  },
-  {
-    key: 'secondStep',
-    component: ({ goToNext, goToPrevious, goTo, ...stepProps }) => MyComponent,
-  }
-];
+function MyComponent() {
+  const { goToNext, goToPrevious, goTo } = useStepper();
+  return <MyStep />;
+}
 
-return (
-  <StepperContainer
-    initialStep={1}
-    onCancel={() => console.log('go to back pressed on the first step')}
-    onSubmit={() => console.log('go to next pressed on the last step')}
-    steps={steps}
-    {...stepProps}
-  />
-);
+function MyStepper() {
+  const steps = [
+    {
+      key: 'firstStep',
+      component: ({ goToNext, goToPrevious, goTo, ...stepProps }) => MyComponent,
+    },
+    {
+      key: 'secondStep',
+      component: ({ goToNext, goToPrevious, goTo, ...stepProps }) => MyComponent,
+    }
+  ];
+
+  return (
+    <StepperContainer
+      initialStep={1}
+      onCancel={() => console.log('go to back pressed on the first step')}
+      onSubmit={() => console.log('go to next pressed on the last step')}
+      steps={steps}
+      {...stepProps}
+    />
+  );
+}
 ```
 
 ### License
