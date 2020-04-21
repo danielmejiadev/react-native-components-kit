@@ -1,6 +1,9 @@
 // Dependencies
 import React from 'react';
 
+// Context
+import StepperContext from '../context';
+
 /**
  * @component StepperContainer
  * @author Daniel Mejia
@@ -16,12 +19,12 @@ export function StepperContainer(props: StepperContainerProps): React.ReactEleme
     onIndexChange?.(newIndex);
   };
 
-  const goTo = (routeKey: string): void => {
-    const indexToGo = steps.findIndex((route) => route.key === routeKey);
+  const goTo = React.useCallback((stepKey: string): void => {
+    const indexToGo = steps.findIndex((route) => route.key === stepKey);
     changeStep(indexToGo);
-  };
+  }, []);
 
-  const goToNext = (): void => {
+  const goToNext = React.useCallback((): void => {
     const nextIndex = currentStep + 1;
     const isLastStep = nextIndex === steps.length;
 
@@ -30,9 +33,9 @@ export function StepperContainer(props: StepperContainerProps): React.ReactEleme
     }
 
     return changeStep(nextIndex);
-  };
+  }, [currentStep]);
 
-  const goToPrevious = (): void => {
+  const goToPrevious = React.useCallback((): void => {
     const previousIndex = currentStep - 1;
     const isFirstIndex = currentStep === 0;
 
@@ -41,15 +44,17 @@ export function StepperContainer(props: StepperContainerProps): React.ReactEleme
     }
 
     return changeStep(previousIndex);
-  };
+  }, [currentStep]);
 
   return (
-    <StepComponent
-      goToNext={React.useCallback(goToNext, [currentStep])}
-      goToPrevious={React.useCallback(goToPrevious, [currentStep])}
-      goTo={React.useCallback(goTo, [])}
-      {...stepProps}
-    />
+    <StepperContext.Provider value={{ goToNext, goToPrevious, goTo, currentStep }}>
+      <StepComponent
+        goToNext={goToNext}
+        goToPrevious={goToPrevious}
+        goTo={goTo}
+        {...stepProps}
+      />
+    </StepperContext.Provider>
   );
 }
 
@@ -80,14 +85,14 @@ export interface StepperContainerProps {
    */
   initialStep: number | 0;
 
- /**
-  * Callback to execute when the index change.
-  */
+  /**
+   * Callback to execute when the index change.
+   */
   onIndexChange?: (index: number) => void;
 
- /**
-  * The callback to execute on the go to back on first step.
-  */
+  /**
+   * The callback to execute on the go to back on first step.
+   */
   onCancel?: () => void;
 
   /**
