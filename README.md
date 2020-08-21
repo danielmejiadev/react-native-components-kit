@@ -33,6 +33,9 @@ It allows you to create a highly customizable and dynamic summary of items.
   title="Bill summary"
   items={[
     {
+      containerStyle: {},
+      titleStyle: {},
+      valueStyle: {},
       title: 'Meat',
       value: '$10.00',
     },

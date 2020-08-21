@@ -30,10 +30,10 @@ export function SummaryItems(props: SummaryItemsProps): React.ReactElement {
         items.map((item, index) => (
           <View
             key={`${item.title}-${item.value}-${index.toString()}`}
-            style={[styles.itemContainer, itemContainerStyle]}
+            style={[styles.itemContainer, itemContainerStyle, item.containerStyle]}
           >
-            <Text style={[styles.itemTitle, itemTitleStyle]}>{item.title}</Text>
-            <Text style={[styles.itemValue, itemValueStyle]}>{item.value}</Text>
+            <Text style={[styles.itemTitle, itemTitleStyle, item.titleStyle]}>{item.title}</Text>
+            <Text style={[styles.itemValue, itemValueStyle, item.valueStyle]}>{item.value}</Text>
           </View>
         ))
       }
@@ -50,6 +50,22 @@ export function SummaryItems(props: SummaryItemsProps): React.ReactElement {
  * @description The properties definition of each item.
  */
 export interface ItemProps {
+  /**
+   * The properties applied to the container.
+   */
+  containerStyle?: StyleProp<ViewStyle>;
+
+  /**
+   * The properties applied to the title text.
+   */
+  titleStyle?: StyleProp<TextStyle>;
+
+
+  /**
+   * The properties applied to the title text.
+   */
+  valueStyle?: StyleProp<TextStyle>;
+
   /**
    * The title of the item.
    */
